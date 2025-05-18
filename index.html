@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   
+   
+    <!-- End layout styles -->
+   
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css">
+
+<style>
+body {
+  margin: 0;
+  padding: 0 20px 0 0; /* top: 0, right: 20px, bottom: 0, left: 0 */
+  height: 100%;
+  overflow: hidden;
+  background: #222;
+}
+
+
+/* From Uiverse.io by joe-watson-sbf */ 
+.flip-card {
+  perspective: 1000px;
+  font-family: sans-serif;
+ width:32%; height:39vh; border-radius:50px; overflow:hidden; cursor:pointer;
+ border:0px solid grey;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 0px solid coral;
+  border-radius: 1rem;
+}
+
+.flip-card-front {
+  background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%,
+     rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
+  color: coral;
+}
+
+.flip-card-back {
+  background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%,
+     bisque 40%, rgb(255, 185, 160) 78%);
+  color: white;
+  transform: rotateY(180deg);
+ 
+}
+/* Stylish Button from Uiverse.io by ferlagher */ 
+button {
+  position: relative;
+ 
+  font-size: 1.0em;
+  padding: 0.3em 1.4em;
+  background: linear-gradient(
+    to right,
+    rgba(90, 0, 0, 0.5),
+    rgba(191, 4, 38, 0.5),
+    rgba(90, 0, 0, 0.5)
+  );
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5em;
+  color:white;
+ font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 500;
+font-family: 'Times New Roman', Times, serif; font-weight: bold;
+  cursor: pointer;
+}
+
+button::before {
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgba(33,33,33,1) 0%, rgba(33,33,33,1) 50%, rgba(150,4,31,1) 50%, rgba(191,4,38,1) 60%);
+  border-radius: 0 0 0.5em 0;
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+button:hover::before {
+  width: 2.2em;
+  height: 2.2em;
+}
+
+button:active {
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  transform: translate(0.1em, 0.1em);
+}
+.menu-item {
+  padding: 2px 2px;
+  cursor: pointer;
+  font-family: Times, sans-serif;
+  color: white;
+  
+}
+
+.menu-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: black;
+  border-radius: 50%;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;  /* ensures width/height include padding */
+  font-size:20px;
+}
+
+
+
+.menu-icon i {
+  font-size: 18px;
+  color: #4CAF50;
+}
+
+.menu-title {
+  z-index: 2;
+ margin-left:-10px;
+}
+
+.menu-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: linear-gradient(135deg, rgba(33,33,33,1) 0%, rgba(33,33,33,1) 50%, rgba(150,4,31,1) 50%, rgba(191,4,38,1) 60%);
+  border-radius: 0 0 0.5em 0;
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+  transition: width 0.3s, height 0.3s;
+  z-index: 3;
+}
+
+.menu-content:hover::before {
+  width: 2.2em;
+  height: 2.2em;
+}
+
+.menu-content:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.menu-content:active {
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  transform: translate(0.1em, 0.1em);
+}
+
+
+ #sheetModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: black;
+     z-index: 1000;
+    }
+    #sheetModal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1f1f1f;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  z-index: 100;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar .sidebar-brand-wrapper {
+  padding: 20px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background-color: #222;
+}
+
+.sidebar .nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #ccc;
+  text-decoration: none;
+  transition: background 0.3s;
+  
+}
+
+.sidebar .nav-link:hover {
+  background-color: #333;
+  
+}
+
+.sidebar .menu-icon {
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.sidebar.collapsed .menu-title {
+  display: none;
+}
+
+/* Top navbar */
+.navbar {
+  width: 100%;
+  height: 60px;
+  background-color: #1c1c1c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #333;
+}
+
+.navbar .navbar-menu-wrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.navbar h3 {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+/* Container */
+.page-body-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 60px;
+  transition: margin-left 0.3s ease;
+  margin-left: 250px;
+}
+
+.sidebar.collapsed ~ .page-body-wrapper {
+  margin-left: 70px;
+}
+
+.main-panel {
+  flex-grow: 1;
+  background-color: #000;
+  padding: 15px;
+  transition: all 0.3s ease;
+  
+  overflow: auto;
+}
+
+
+
+.grade-button:hover, #accessBtn:hover {
+  background: #555;
+}
+
+/* Toggle Button */
+.navbar-toggler {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* From Uiverse.io by guilhermeyohan */ 
+.subscribe {
+  position: relative;
+  height: 140px;
+  width: 240px;
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 4px;
+  color: #333;
+  box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.4);
+}
+
+.subscribe:after {
+  position: absolute;
+  content: "";
+  right: -10px;
+  bottom: 18px;
+  width: 0;
+  height: 0;
+  border-left: 0px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #1a044e;
+}
+
+.subscribe p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  line-height: 28px;
+}
+
+.subscribe input {
+ 
+  bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 10px;
+  width: 82%;
+  background:black;
+  border-radius:30px;
+  transition: all .25s ease;
+  color:white;
+  font-size:15px;
+}
+
+.subscribe input:focus {
+  outline: none;
+  border-bottom: 1px solid #0d095e;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'sans-serif';
+}
+
+.subscribe .submit-btn {
+  position: absolute;
+  border-radius: 30px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #0f0092;
+  color: #FFF;
+  padding: 12px 25px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  right: -10px;
+  bottom: -20px;
+  width:235px;
+  cursor: pointer;
+  transition: all .25s ease;
+  box-shadow: -5px 6px 20px 0px rgba(26, 26, 26, 0.4);
+}
+
+.subscribe .submit-btn:hover {
+  background-color: #07013d;
+  box-shadow: -5px 6px 20px 0px rgba(88, 88, 88, 0.569);
+}
+</style>
+
+  </head>
+  <body>
+
+
+  <!-- partial:../../partials/_sidebar.html -->
+  <nav class="sidebar sidebar-offcanvas" id="sidebar"style="background:transparent;width:25%;margin-top:6%;margin-left:0%;">
+
+    <ul class="nav">
+
+ <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+      <i class="fa fa-book" style="color: #007bff;"></i>
+    </span>
+    <span class="menu-title">CURRICULUM TRACKER</span>
+  </div>
+</div> 
+      </li>
+
+
+       <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+      <i class="fa fa-line-chart" style="color: #28a745;"></i>
+    </span>
+    <span class="menu-title">APR TRACKER</span>
+  </div>
+</div> 
+      </li>
+
+       <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+      <i class="fa fa-check-square" style="color: #dc3545;"></i>
+    </span>
+    <span class="menu-title">ASSESSMENT TRACKER</span>
+  </div>
+</div> 
+      </li>
+       <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+     <i class="fa fa-list-alt" style="color: #ffc107;"></i>
+    </span>
+    <span class="menu-title">MATERIAL COVERED</span>
+  </div>
+</div> 
+      </li>
+       <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+    <i class="fa fa-calendar" style="color: #6f42c1;"></i>
+    </span>
+    <span class="menu-title">WEEKLY PLAN</span>
+  </div>
+</div> 
+      </li>
+
+       <li class="nav-item menu-items">   
+<div class="menu-item">
+  <div class="menu-content">
+    <span class="menu-icon">
+      <i class="fa fa-home"></i>
+    </span>
+    <span class="menu-title">OTHER</span>
+  </div>
+</div> 
+      </li>
+
+    </ul>
+  </nav>
+  <!-- partial -->
+
+
+  <div class="container-fluid page-body-wrapper"style="background:#222;">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar p-0 fixed-top d-flex flex-row"style="background:#222;height:8%;">
+
+      <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"style="color:red;"></span>
+        </button>
+       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" style="color: white; box-shadow: none; font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+  <span>CURRICULUM OUTLINE: ALROWAD INTERNATIONAL SCHOOL</span>
+</button>
+
+
+
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="mdi mdi-format-line-spacing"style="color:red;"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+
+<div class="main-panel" style="position: relative; background:#000; border-radius:50px; overflow:hidden; width: 100%; height: 81vh;z-index: 1000;">
+  <div id="sheetModal" style="display: none;position: absolute;top: 0%;left: 0%;right:0%;bottom:0%;width: 100%;height: 100%;background: black;border-radius: 50px;overflow: hidden; z-index: 1000;">
+    <!-- Fullscreen Toggle Button -->
+    <button id="fullscreenToggleBtn" style="position: absolute; top: 14px; right: 90px; z-index: 1001; width: 40px; height: 30px; text-align: center; line-height: 20px; padding: 0; color: limegreen; font-size: 16px; cursor: pointer;background:red;color:white;font-size:20px;font-weight:bold;border-radius:0px;border-right:3px solid black;border-left:3px solid black;">⛶</button>
+
+
+    <!-- Close Button -->
+    <button id="closeBtn" style="position: absolute; top: 14px; right: 25px; z-index: 1001;box-shadow:none;width: 70px; height: 30px; text-align: center; line-height: 20px; padding: 0; border: none;color: limegreen; font-size: 16px; cursor: pointer;background:red;color:white;font-size:18px;font-weight:bold;border-radius:0px;border-right:3px solid black;border-left:3px solid black;">Exit</button>
+
+    <iframe id="sheetFrame" allowfullscreen style="width: 100%;height: 100%;border-radius: 50px;"></iframe>
+  </div>
+
+<!-- From Uiverse.io by guilhermeyohan --> 
+
+<!-- Password Modal -->
+<div id="passwordModal" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  padding-top: 20vh;
+  text-align: center;
+">
+  <div class="subscribe" style="
+    background: white;
+    display: inline-block;
+    padding: 2em;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+  ">
+    <!-- Close Button -->
+    <div onclick="document.getElementById('passwordModal').style.display='none'" style="
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      color: red;
+      cursor: pointer;
+    ">&times;</div>
+
+    <p>LOGIN</p>
+    <input id="passwordInput" placeholder="Enter Password" class="subscribe-input" type="password"><br>
+    <div id="submitPassword" class="submit-btn">SUBMIT</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+   <div class="row" style="display: flex; gap: 2%; flex-wrap: nowrap;">
+
+          <!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/COMPUTER.jpg" alt="Dept. of Computing" style="width:100%; height:100%; object-fit:cover;">
+
+             <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    DEPT. OF COMPUTING-SAT
+</h2>
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+    <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Department of Computing Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div>
+
+
+          <!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/maths.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+
+             <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    DEPT. OF MATHEMATICS
+</h2>
+
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+     <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Department of Mathematics Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div>          <!-- Card 3 -->
+
+<!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/science.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+
+             <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    DEPT. OF SCIENCE
+</h2>
+
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+    <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Department of Science Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div></div>
+        <div class="row" style="display: flex; gap: 2%; flex-wrap: nowrap;margin-top:15px;">
+
+                    <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/ig.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+
+             <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    DEPT. OF COMPUTING-IG
+</h2>
+
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+    <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Department of Computing Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div>
+
+
+          <!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/english.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+
+            <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    DEPT. OF ENGISH
+</h2>
+
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+    <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Department of English Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div>          <!-- Card 3 -->
+
+<!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-card-inner" style="border-radius:50px;">
+
+              <!-- Front side -->
+              <div class="flip-card-front" style="border-radius:50px; overflow:hidden;">
+                <div class="card show-section" data-target="Computing"
+                  style="border-radius:50px;height:300px;cursor:pointer;overflow:hidden;position:relative;">
+                <img src="Images/others.jpg" alt="" style="width:100%; height:100%; object-fit:cover;">
+
+            <h2 class="card-title"
+    style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to right, rgba(15,32,39,0.8), rgba(32,58,67,0.8), rgba(15,32,39,0.8));color:white;text-align:center;font-size:16px;margin:0;padding:5px;font-family: 'Times New Roman', Times, serif; font-weight: bold;">
+    OTHER DEPARTMETS
+</h2>
+
+                </div>
+              </div>
+
+   <div class="flip-card-back" style="border-radius: 50px; background-image: linear-gradient(to bottom right, rgba(28,28,28,0.7), rgba(51,51,51,0.7)), url('Images/backflip.gif'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 10px; position: relative;">
+
+  <h2 class="title" style="margin-top: 0px;color:grey;">CURRICULUM</h2>
+
+
+
+  <div class="button-group" style="display: flex; flex-direction: column; gap: 4px;margin-top:0px;">
+     <button class="accessBtn">Primary Grades</button>
+    <button class="accessBtn">Middle Grades</button>
+    <button class="accessBtn">Higher Grades</button>
+
+  </div>
+  <h6 style="color: grey; font-size: 1.1em; margin-top: 0; margin-bottom: 0; text-align: center; padding: 0 20px;">
+  Explore the Other Departments Curriculum and Syllabus Outline.
+</h6>
+</div>
+</div>
+</div></div>
+        </div>
+       
+
+      </div> <!-- content-wrapper -->
+    </div> <!-- main-panel -->
+
+
+ <footer class="footer"style="text-align:center;color:green;font-family: 'Times New Roman', Times, serif;margin-left:20%;color:grey;">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">| Department of Computer Science | Al - Rowad International Schools  |  (الرواد العالمية)  | </span>
+  
+
+
+          </div>
+        </footer>
+
+  
+
+<script>
+  document.querySelector('.navbar-toggler').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+  });
+</script>
+
+
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzqEgyl3r6FLDa1yB96nhGHOv_7z5-Nw_x8KfwVVcLavr2wxqQDSM7wcFvGuIDLqbjx/exec";
+
+  // Fix: Attach click to all buttons with class 'accessBtn'
+  document.querySelectorAll(".accessBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.getElementById("passwordModal").style.display = "block";
+    });
+  });
+
+  document.getElementById("submitPassword").addEventListener("click", async () => {
+    const password = document.getElementById("passwordInput").value;
+    if (!password) return;
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams({ password })
+      });
+
+      const link = await response.text();
+
+      if (link === "INVALID") {
+        alert("❌ Invalid Password!");
+      } else {
+        document.getElementById("sheetFrame").src = link;
+        document.getElementById("sheetModal").style.display = "block";
+      }
+
+      // Hide modal and reset
+      document.getElementById("passwordModal").style.display = "none";
+      document.getElementById("passwordInput").value = "";
+    } catch (err) {
+      alert("Fetch error: " + err.message);
+    }
+  });
+
+  document.getElementById("closeBtn").addEventListener("click", async () => {
+    document.getElementById("sheetModal").style.display = "none";
+    document.getElementById("sheetFrame").src = "";
+
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        await document.msExitFullscreen();
+      }
+    }
+  });
+
+  document.getElementById("fullscreenToggleBtn").addEventListener("click", async () => {
+    const modal = document.getElementById("sheetModal");
+
+    try {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (modal.requestFullscreen) {
+          await modal.requestFullscreen();
+        } else if (modal.webkitRequestFullscreen) {
+          await modal.webkitRequestFullscreen();
+        } else if (modal.msRequestFullscreen) {
+          await modal.msRequestFullscreen();
+        }
+        document.getElementById("fullscreenToggleBtn").innerText = "⛶";
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          await document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          await document.msExitFullscreen();
+        }
+        document.getElementById("fullscreenToggleBtn").innerText = "⛶";
+      }
+    } catch (err) {
+      alert("Fullscreen error: " + err.message);
+    }
+  });
+</script>
+
+
+
+
+
+
+  </body>
+</html>
